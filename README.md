@@ -4,7 +4,7 @@
 [![Coverage](https://codecov.io/gh/LucaCappelletti94/incremental-tree-set-union/branch/main/graph/badge.svg)](https://codecov.io/gh/LucaCappelletti94/incremental-tree-set-union)
 [![Crates.io](https://img.shields.io/crates/v/incremental-tree-set-union.svg)](https://crates.io/crates/incremental-tree-set-union)
 [![docs.rs](https://docs.rs/incremental-tree-set-union/badge.svg)](https://docs.rs/incremental-tree-set-union)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/LucaCappelletti94/incremental-tree-set-union/blob/main/LICENSE)
 
 A `no_std` Rust implementation of the Gabow-Tarjan linear-time algorithm for incremental tree set union (JCSS 1985).
 
@@ -193,20 +193,20 @@ Our total time for the incremental variant is **O(m + n log log n)** instead of 
 
 ## Paper bugs discovered
 
-Two bugs in the published pseudocode of [GT85] were independently confirmed by both existing reference implementations:
+Two bugs in the published pseudocode of `GT85` were independently confirmed by both existing reference implementations:
 
 ### Bug 1: MacroFind vs MicroFind in `find` (p.217, line 7)
 
-The paper's line 7 says `macrounite(macrofind(x), x)`. The correct version (from the earlier [GT83] technical report, p.248) is `macrounite(microfind(x), x)`. Using MacroFind can cause an infinite loop.
+The paper's line 7 says `macrounite(macrofind(x), x)`. The correct version (from the earlier `GT83` technical report, p.248) is `macrounite(microfind(x), x)`. Using MacroFind can cause an infinite loop.
 
-- **janezb (C++)**: *"Note: in line 7 of 'find', [GT85] (p. 217) has MacroFind, while [GT83] (p. 248) has MicroFind; the latter is correct, while the former can cause an endless loop."*
+- **janezb (C++)**: *"Note: in line 7 of 'find', GT85 (p. 217) has MacroFind, while GT83 (p. 248) has MicroFind; the latter is correct, while the former can cause an endless loop."*
 - **bzliu94 (Python)**: *"there is a bug from pseudocode here for first argument"*
 
 ### Bug 2: macro_top continuation (unstated requirement)
 
-After `MacroUnite`, the algorithm must continue from the node closest to the tree root in the macroset component, not from an arbitrary union-find representative. Neither [GT85] nor [GT83] states this requirement.
+After `MacroUnite`, the algorithm must continue from the node closest to the tree root in the macroset component, not from an arbitrary union-find representative. Neither `GT85` nor `GT83` states this requirement.
 
-- **janezb (C++)**: *"An important detail mentioned in neither [GT85] nor [GT83]: we need to continue from the highest (i.e. closest to root) member of the macroset."*
+- **janezb (C++)**: *"An important detail mentioned in neither GT85 nor GT83: we need to continue from the highest (i.e. closest to root) member of the macroset."*
 - **bzliu94 (Python)**: achieves the same effect via `NamedUnionFind` where the canonical representative is always the highest element by design.
 
 ## Implementation notes
