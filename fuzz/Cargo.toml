@@ -1,0 +1,36 @@
+[package]
+name = "incremental-tree-set-union-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2024"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+arbitrary = { version = "1", features = ["derive"] }
+
+[dependencies.incremental-tree-set-union]
+path = ".."
+
+[[bin]]
+name = "fuzz_static"
+path = "fuzz_targets/fuzz_static.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "fuzz_incremental"
+path = "fuzz_targets/fuzz_incremental.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "fuzz_both"
+path = "fuzz_targets/fuzz_both.rs"
+test = false
+doc = false
+bench = false
