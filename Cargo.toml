@@ -1,0 +1,32 @@
+[package]
+name = "incremental-tree-set-union"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+license = "MIT"
+description = "Gabow-Tarjan linear-time algorithm for incremental tree set union (JCSS 1985)"
+repository = "https://github.com/LucaCappelletti94/incremental-tree-set-union"
+readme = "README.md"
+keywords = ["union-find", "disjoint-set", "tree", "linear-time", "algorithm"]
+categories = ["algorithms", "data-structures", "no-std"]
+
+[features]
+default = ["std"]
+std = []
+
+[dev-dependencies]
+rand = "0.10.0"
+proptest = "1"
+serde_json = "1"
+criterion = { version = "0.8.2", features = ["html_reports"] }
+disjoint-sets = "0.4"
+union-find = "0.4"
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
+strip = true
+
+[[bench]]
+name = "scaling"
+harness = false
