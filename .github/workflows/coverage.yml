@@ -5,12 +5,16 @@ on:
     branches: [main]
   pull_request:
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   coverage:
     name: Code coverage
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: dtolnay/rust-toolchain@nightly
       - uses: Swatinem/rust-cache@v2
       - name: Install cargo-tarpaulin
@@ -18,9 +22,10 @@ jobs:
       - name: Generate coverage
         run: cargo tarpaulin --engine llvm --out xml --output-dir coverage
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
+          use_oidc: true
+          disable_search: true
           files: coverage/cobertura.xml
-          fail_ci_if_error: false
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true
+          verbose: true
