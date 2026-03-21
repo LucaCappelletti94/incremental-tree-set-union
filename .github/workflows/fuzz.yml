@@ -1,0 +1,23 @@
+name: Fuzz
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  fuzz:
+    name: Fuzz (${{ matrix.target }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target: [fuzz_static, fuzz_incremental, fuzz_both]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@nightly
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: fuzz
+      - name: Install cargo-fuzz
+        run: cargo install cargo-fuzz
+      - name: Run fuzzer (60s smoke test)
+        run: cargo fuzz run ${{ matrix.target }} -- -max_total_time=60
