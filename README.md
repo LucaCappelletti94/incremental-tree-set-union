@@ -123,7 +123,7 @@ The microset size parameter b is chosen adaptively based on n to balance the ans
 | 16,384 - 524,287 | 5 | 4                  | 2,048                |
 | 524,288 - ~25M  | 6 | 5                  | 16,384               |
 
-![b parameter effect](docs/b_parameter.svg)
+![b parameter effect](https://raw.githubusercontent.com/LucaCappelletti94/incremental-tree-set-union/main/docs/b_parameter.svg)
 
 ## Performance
 
@@ -146,7 +146,7 @@ Benchmarked against [`disjoint-sets`](https://crates.io/crates/disjoint-sets) an
 | 100,000   | 7.8 ms             | 1.25 ms       | 1.44 ms    | 6x       |
 | 1,000,000 | 225 ms             | 25 ms         | 32 ms      | 9x       |
 
-![Static comparison](docs/comparison.svg)
+![Static comparison](https://raw.githubusercontent.com/LucaCappelletti94/incremental-tree-set-union/main/docs/comparison.svg)
 
 ### Static variant, query-only (construction excluded)
 
@@ -159,7 +159,7 @@ Benchmarked against [`disjoint-sets`](https://crates.io/crates/disjoint-sets) an
 
 Even with construction excluded, the per-find overhead from dependent cache misses keeps the algorithm 5-10x slower. The gap narrows at 100K (where data structures partially fit in L3 cache) but widens again at 1M when they spill to DRAM and the 3:1 load ratio per find fully manifests.
 
-![Query-only comparison](docs/query_only.svg)
+![Query-only comparison](https://raw.githubusercontent.com/LucaCappelletti94/incremental-tree-set-union/main/docs/query_only.svg)
 
 ### Incremental variant vs standard union-find
 
@@ -171,7 +171,7 @@ The incremental variant is substantially slower because every `grow` call does a
 | 10,000  | 4.7 ms                 | 48 us         | 74 us      | 98x      |
 | 100,000 | 58 ms                  | 1.19 ms       | 1.45 ms    | 49x      |
 
-![Incremental comparison](docs/incremental_comparison.svg)
+![Incremental comparison](https://raw.githubusercontent.com/LucaCappelletti94/incremental-tree-set-union/main/docs/incremental_comparison.svg)
 
 ## Complexity deviation in the incremental variant
 
