@@ -60,7 +60,7 @@ dependencies = [
 
 [[package]]
 name = "incremental-tree-set-union"
-version = "0.1.0"
+version = "0.1.1"
 
 [[package]]
 name = "incremental-tree-set-union-fuzz"
