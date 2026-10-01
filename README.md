@@ -220,7 +220,7 @@ After `MacroUnite`, the algorithm must continue from the node closest to the tre
 ## Testing
 
 - 51 tests across 6 files (4 integration test files + 2 unit test modules + 2 doc-tests from this README): correctness properties, edge cases (single node, path, star, binary tree, adversarial grow, n=100K), golden vectors verified against the bzliu94 Python reference implementation, and randomized tests with dual oracle (standard union-find + naive walk-up)
-- 3 cargo-fuzz targets (`fuzz_static`, `fuzz_incremental`, `fuzz_both`) checking against a union-find oracle and naive walk-up oracle simultaneously, with structured tree generation (random, path, star, caterpillar) and phased operation modes (link-all-then-find-all)
+- 3 cargo-fuzz targets (`fuzz_static`, `fuzz_incremental`, `fuzz_both`) checking against a union-find oracle and naive walk-up oracle simultaneously, with structured tree generation (random, path, star, caterpillar) and phased operation modes (link-all-then-find-all), each starting from the seed corpus in `fuzz/seeds/<target>`, grown from the golden vectors and edge-case shapes and run on ClusterFuzzLite
 - 100% line coverage (tarpaulin LLVM)
 
 ```bash
